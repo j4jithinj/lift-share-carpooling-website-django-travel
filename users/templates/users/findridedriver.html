@@ -1,0 +1,20 @@
+{% extends 'users/base.html' %}
+{% block content %}
+{% load static %}
+<div class="text-white">
+<!--    <a href="{% url 'users:logout' %}">Log out</a>-->
+    <h4 style="color:white">Hi {{ user.first_name }}, welcomes!</h4>
+    <ul style="color:white">Here are rides available for you to choose:
+        {% for ride in rides %}
+        <li>
+            <p style="color:white">To {{ ride.destination }} before {{ ride.arrivaldate }}</p>
+            <p style="color:white">Passenger number: {{ ride.total_psg }}</p>
+            <a href="{% url 'users:handledrive' user.id ride.id %}">Go for this one!</a>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'users:display' user.id %}">Back</a>
+</div>
+{% endblock %}

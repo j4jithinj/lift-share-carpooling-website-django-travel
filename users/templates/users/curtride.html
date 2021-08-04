@@ -1,0 +1,32 @@
+{% extends 'users/base.html' %}
+{% block content %}
+{% load static %}
+
+<br>
+{% load crispy_forms_tags %}
+<div class="form-wrapper" id="demo" style="margin-top:10px;width:40%;margin-bottom:100px;">
+    <h4 style="color:blue">Please edit the information about your ride</h4>
+    <hr>
+    <form action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="arrivaldate">Arrival date & time</label>
+            <input class="form-control" id="arrivaldate" value="{{arrivaldate}}" name="arrivaldate" type="datetime-local">
+        </div>
+        {{form|crispy}}
+
+        <!--            {% for field in form %}-->
+        <!--            <div class="field-wrapper">-->
+        <!--                {{ field.errors }}-->
+        <!--                {{ field.label_tag }} {{ field }}-->
+        <!--                {% if field.help_text %}-->
+        <!--                    {{ field.help_text|safe }}-->
+        <!--                {% endif %}-->
+        <!--            </div>-->
+        <!--            {% endfor %}-->
+        <div class="button-wrapper submit"><input class="btn btn-success" type="submit" value="Submit Edit"></div>
+    </form>
+    <br>
+    <a href="{% url 'users:display' user.id %}">Back to rides</a>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block button %}
+<a href="{% url 'users:homepage' %}"><img src="{% static 'backbutton.png' %}" height="40px" width="40px" style="margin-left:20px"></a>
+{% endblock %}
+{% block content %}
+
+
+<!--    <div class="container-fluid" style="background-color: rgba(0, 0, 0, 1);padding:10px;">-->
+<!--        <a style="padding-right:20px;font-weight:bold" href="http://127.0.0.1:8000">Home</a>-->
+<!--        {% if user.is_authenticated %}-->
+<!--        <a style="padding-right:20px;font-weight:bold" href="{% url 'users:logout' %}">Log out</a>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+
+
+<!--<h2>Login</h2>-->
+
+{% if message %}
+{{ message }}
+{% endif %}
+
+{% if next %}
+<p>Hey, you cannot access that page.</p>
+{% endif %}
+{% load crispy_forms_tags %}
+<br>
+<br>
+<br>
+<div class="form-wrapper" id="demo">
+    <form action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <!--            {% for field in form %}-->
+        <!--                <div class="field-wrapper">-->
+        <!--                    {{ field.errors }}-->
+        <!--                    {{ field.label_tag }} {{ field }}-->
+        <!--                    {% if field.help_text %}-->
+        <!--                        <p class="help">{{ field.help_text|safe }}</p>-->
+        <!--                    {% endif %}-->
+        <!--                </div>-->
+        <!--            {% endfor %}-->
+        <div class="button-wrapper submit">
+            <p><input type="submit" value="Login" class="btn btn-success"></p>
+        </div>
+    </form>
+    <br>
+    <a style="color:red" href="/users/register/">Register for an account</a>
+</div>
+{% endblock %}

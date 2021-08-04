@@ -1,0 +1,25 @@
+ label {
+        font-weight: bold;
+        color:white;
+    }
+    #demo {
+        border: 2px solid blue;
+        border-radius: 30px;
+        margin:auto;
+        margin-top:20px;
+        margin-bottom:100px;
+        padding:20px;
+        width:50%;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    p {
+        font-weight: bold;
+    }
+    body {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment:fixed;
+        background-size: cover;min-height: 100vh ; min-width: 100vh ;  background-image: url('/static/s1.jpg');"
+        height: 100%;
+
+    }

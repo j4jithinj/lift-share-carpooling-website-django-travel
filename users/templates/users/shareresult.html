@@ -1,0 +1,41 @@
+{% extends 'users/base.html' %}
+{% block content %}
+{% load static %}
+<!--<div class="container-fluid" style="background-color: rgba(0, 0, 0, 1);padding:10px;">-->
+<!--    {% if user.is_authenticated %}-->
+<!--    {% if not user_profile.driver %}-->
+
+<!--    <a style="padding-right:20px;font-weight:bold" style="color:red;padding-right:10px;"-->
+<!--       href="{% url 'users:regisdriver' user.id %}">Register for driver!</a>-->
+<!--    {% else %}-->
+<!--    <a style="padding-right:20px;font-weight:bold" href="{% url 'users:editinfo' user.id %}">Edit Your Driver info</a>-->
+<!--    {% endif %}-->
+
+<!--    <a style="padding-right:20px;font-weight:bold" style="color:red;padding-right:10px;"-->
+<!--       href="{% url 'users:changepassword' user.id %}">Change Password</a>-->
+<!--    <a style="padding-right:20px;font-weight:bold" href="{% url 'users:display' user.id %}">Ride</a>-->
+<!--    <a style="padding-right:20px;font-weight:bold" href="{% url 'users:logout' %}">Log out</a>-->
+<!--    {% endif %}-->
+<!--</div>-->
+<a href="{% url 'users:logout' %}">Log out</a>
+<div class="container text-white"
+     style="margin-bottom:50px;background-color: rgba(0, 0, 0, 0.8);margin-top:50px;padding:30px;border-radius:30px;">
+
+    <h4 style="color:white">Hi {{ user.first_name }}, welcomes!</h4>
+
+    {% if sharerides|length > 0 %}
+    <ul style="color:white">Here are sharable rides you can join:
+        {% for ride in sharerides %}
+        <li>
+            <p style="color:white">To {{ ride.destination }} before {{ ride.arrivaldate }}</p>
+            <p style="color:white">Contact number : {{ ride.rider_mobile }}</p>
+            <a href="{% url 'users:joinshare' user.id ride.id passenger %}">join this ride</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p style="color:white">No rides available for you to share now</p>
+    <a href="{% url 'users:display' user.id %}">Back to display</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ShareRide</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'csss.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}"/>-->
+    <!--    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}"/>-->
+    <!--    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>-->
+</head>
+{% block bodytag %}
+
+<body>
+    {% endblock %}
+    <nav class="navbar navbar-inverse bg-grey" style="height:10px">
+        <div class="container-fluid bg-white" style="height:10px">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://127.0.0.1:8000/admin">@ShareRide</a>
+            </div>
+            {% block menu %}
+            {% endblock %}
+
+            <ul class="nav navbar-nav navbar-right">
+
+                {% if request.user.is_authenticated %}
+                <!--            <li><a href="{% url 'users:profile' request.user.id %}"><span></span>Welcome {{request.user.first_name}}</a></li>-->
+                <li><a><span></span>Welcome {{request.user.first_name}}</a></li>
+                <ul class="nav navbar-nav navbar-right" style="margin-left: auto;top: 0%;">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top: 0px;">
+                            <img src="{{request.user.propic.profile_pic.url}}" class="img-thumbnail" width="50px"
+                                style="background-color:whitesmoke">
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if user.is_authenticated %}
+                            {% if not user_profile.driver %}
+                            <li><a href="{% url 'users:regisdriver' user.id %}">Register for driver</a></li>
+                            {% else %}
+                            <li><a href="{% url 'users:editinfo' user.id %}">Edit Your Driver info</a></li>
+                            <li><a href="{% url 'users:edit_profile' %}">Edit Your profile info</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'users:display' user.id %}">Rides</a></li>
+                            <li><a href="{% url 'users:changepassword' user.id %}">Change Password</a></li>
+                            <li><a href="{% url 'users:logout' %}"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+                <!--            <li><a href="{% url 'users:homepage' %}"><span class="glyphicon glyphicon-home"> </span>Home</a></li>-->
+                {% else %}
+                <!--            <li><a href="{% url 'users:homepage' %}"><span class="glyphicon glyphicon-home"> </span>Home</a></li>-->
+                <!-- <li><a href="{% url 'users:register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% block button %}
+    <a href="{% url 'users:profile' request.user.id %}">
+        <img src="{% static 'backbutton.png' %}" height="40px" width="40px" style="margin-left:20px">
+    </a>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>
